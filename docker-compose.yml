@@ -22,7 +22,7 @@ services:
     environment:
       LANG: C.UTF-8
       MYSQL_ROOT_PASSWORD: "rootroot"
-      MYSQL_DATABASE: "jeepaydb"
+      MYSQL_DATABASE: "jeepay"
       MYSQL_USER: "jeepay"
       MYSQL_PASSWORD: "jeepay"
     ports:
@@ -32,7 +32,7 @@ services:
       - ./docs/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       jeepay:
-        ipv4_address: 172.20.0.10
+        ipv4_address: localhost
   activemq:
     build:
       context: ./docker/activemq
@@ -51,7 +51,7 @@ services:
       - ./docker/activemq/activemq.xml:/opt/activemq/conf/activemq.xml
     networks:
       jeepay:
-        ipv4_address: 172.20.0.11
+        ipv4_address: localhost
   # 扩展额外延迟插件的 RabbitMQ
   #rabbitmq:
   #  build:
@@ -73,7 +73,7 @@ services:
   #    - rabbitmq:/var/lib/rabbitmq
   #  networks:
   #    jeepay:
-  #      ipv4_address: 172.20.0.11
+  #      ipv4_address: localhost
   # 使用 activemq 如有需要请修改 docker/activemq.xml 下相关配置
   #rocketmq-namesrv:
   #  image: apache/rocketmq:4.9.3
@@ -85,7 +85,7 @@ services:
   #  command: sh mqnamesrv
   #  networks:
   #    jeepay:
-  #      ipv4_address: 172.20.0.11
+  #      ipv4_address: localhost
   #rocketmq-broker:
   #  image: apache/rocketmq:4.9.3
   #  container_name: rmqbroker
@@ -113,7 +113,7 @@ services:
       - "6380:6379"
     networks:
       jeepay:
-        ipv4_address: 172.20.0.12
+        ipv4_address: localhost
     volumes:
       - redis:/data
   payment:
